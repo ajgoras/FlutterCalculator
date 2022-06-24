@@ -31942,6 +31942,7 @@ return o},
 Vm(){this.af(new A.a_c(this))},
 TL(){this.af(new A.a_a(this))},
 O(a9,b0){var s,r,q,p,o,n,m,l,k,j,i,h,g,f,e,d,c,b,a,a0,a1,a2,a3,a4,a5,a6=this,a7=null,a8=b0.R(t.w).f.a.b
+if(a8>1000)a8=500
 a6.a.toString
 s=A.a8a("Calculator",a7)
 r=A.bX(B.dR,A.cC(B.xQ,new A.ZQ(b0),a7),a7,a7,a7,a7,a7)

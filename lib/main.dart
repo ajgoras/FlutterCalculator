@@ -36,6 +36,7 @@ class MyHomePage extends StatefulWidget {
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
+
 class _MyHomePageState extends State<MyHomePage> {
   String calculatorText = "";
   bool iscalculatorTextContainsOperator = false;
@@ -213,7 +214,8 @@ class _MyHomePageState extends State<MyHomePage> {
       if (iscalculatorTextContainsOperator == true) {
         operation();
         if (checkIsInt() == true) {
-          calculatorText = calculatorText.substring(0, calculatorText.length - 2);
+          calculatorText =
+              calculatorText.substring(0, calculatorText.length - 2);
           iscalculatorTextContainsDot = false;
         }
         iscalculatorTextContainsOperator = false;
@@ -236,6 +238,9 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     double h = MediaQuery.of(context).size.height;
+    if (h > 1000) {
+      h = 500;
+    }
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
