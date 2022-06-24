@@ -1,16 +1,26 @@
-# calculator
+# Calculator
 
-A new Flutter project.
+---
 
-## Getting Started
+_Simple calculator app using Flutter SDK_
 
-This project is a starting point for a Flutter application.
+## Features
 
-A few resources to get you started if this is your first Flutter project:
+- ➕➖ Add/Substract/Multiply/Divide Operation ✖️➗
+- ⬅️ ClearAll/Backspace Buttons 🔙
+- ➕/➖ Change Sign Button
+- ☀️ Light/Dark Mode 🌙
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+## Used packages:
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+[Adaptive Theme](https://pub.dev/packages/adaptive_theme)
+
+## Presentation
+
+##### _Light Theme:_
+
+![Screenshot1](https://github.com/ajgoras/FlutterCalculator/blob/main/img/light.png?raw=true)
+
+##### _Dark Theme:_
+
+![Screenshot2](https://github.com/ajgoras/FlutterCalculator/blob/main/img/dark.png?raw=true)
