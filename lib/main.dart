@@ -22,10 +22,10 @@ class MyApp extends StatelessWidget {
       ),
       initial: AdaptiveThemeMode.light,
       builder: (theme, darkTheme) => MaterialApp(
-        title: 'Calculator',
+        title: 'Kalkulator',
         theme: theme,
         darkTheme: darkTheme,
-        home: const MyHomePage(title: 'Calculator'),
+        home: const MyHomePage(title: 'Kalkulator'),
       ),
     );
   }
@@ -64,6 +64,7 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() {
       calculatorText = "";
       iscalculatorTextContainsOperator = false;
+      iscalculatorTextContainsDot = false;
     });
   }
 
@@ -76,6 +77,9 @@ class _MyHomePageState extends State<MyHomePage> {
             calculatorText[calculatorText.length - 1] == '/') {
           iscalculatorTextContainsOperator = false;
         }
+        if (calculatorText[calculatorText.length - 1] == '.') {
+          iscalculatorTextContainsDot = false;
+        }
         calculatorText = calculatorText.substring(0, calculatorText.length - 1);
       }
     });
@@ -87,6 +91,7 @@ class _MyHomePageState extends State<MyHomePage> {
           iscalculatorTextContainsOperator == false) {
         calculatorText = calculatorText + "-";
         iscalculatorTextContainsOperator = true;
+        iscalculatorTextContainsDot = false;
       }
     });
   }
@@ -97,6 +102,7 @@ class _MyHomePageState extends State<MyHomePage> {
           iscalculatorTextContainsOperator == false) {
         calculatorText = calculatorText + "+";
         iscalculatorTextContainsOperator = true;
+        iscalculatorTextContainsDot = false;
       }
     });
   }
@@ -107,6 +113,7 @@ class _MyHomePageState extends State<MyHomePage> {
           iscalculatorTextContainsOperator == false) {
         calculatorText = calculatorText + "*";
         iscalculatorTextContainsOperator = true;
+        iscalculatorTextContainsDot = false;
       }
     });
   }
@@ -117,13 +124,20 @@ class _MyHomePageState extends State<MyHomePage> {
           iscalculatorTextContainsOperator == false) {
         calculatorText = calculatorText + "/";
         iscalculatorTextContainsOperator = true;
+        iscalculatorTextContainsDot = false;
       }
     });
   }
 
   void _dot() {
     setState(() {
-      if (calculatorText.length > 0 && iscalculatorTextContainsDot == false) {
+      if (calculatorText.length > 0 &&
+          iscalculatorTextContainsDot == false &&
+          calculatorText[calculatorText.length - 1] != '.' &&
+          calculatorText[calculatorText.length - 1] != '+' &&
+          calculatorText[calculatorText.length - 1] != '-' &&
+          calculatorText[calculatorText.length - 1] != '*' &&
+          calculatorText[calculatorText.length - 1] != '/') {
         calculatorText = calculatorText + ".";
         iscalculatorTextContainsDot = true;
       }
@@ -147,6 +161,7 @@ class _MyHomePageState extends State<MyHomePage> {
         }
       }
       double result = double.parse(a) + double.parse(b);
+      result = double.parse((result).toStringAsFixed(9));
       calculatorText = result.toString();
     });
   }
@@ -168,6 +183,7 @@ class _MyHomePageState extends State<MyHomePage> {
         }
       }
       double result = double.parse(a) - double.parse(b);
+      result = double.parse((result).toStringAsFixed(9));
       calculatorText = result.toString();
     });
   }
@@ -189,6 +205,7 @@ class _MyHomePageState extends State<MyHomePage> {
         }
       }
       double result = double.parse(a) * double.parse(b);
+      result = double.parse((result).toStringAsFixed(9));
       calculatorText = result.toString();
     });
   }
@@ -210,6 +227,7 @@ class _MyHomePageState extends State<MyHomePage> {
         }
       }
       double result = double.parse(a) / double.parse(b);
+      result = double.parse((result).toStringAsFixed(9));
       calculatorText = result.toString();
     });
   }
@@ -242,6 +260,7 @@ class _MyHomePageState extends State<MyHomePage> {
         if (checkIsInt() == true) {
           calculatorText =
               calculatorText.substring(0, calculatorText.length - 2);
+          iscalculatorTextContainsDot = false;
         }
         iscalculatorTextContainsOperator = false;
       }
