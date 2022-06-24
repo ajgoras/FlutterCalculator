@@ -8,7 +8,6 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return AdaptiveTheme(
@@ -22,10 +21,10 @@ class MyApp extends StatelessWidget {
       ),
       initial: AdaptiveThemeMode.light,
       builder: (theme, darkTheme) => MaterialApp(
-        title: 'Kalkulator',
+        title: 'Calculator',
         theme: theme,
         darkTheme: darkTheme,
-        home: const MyHomePage(title: 'Kalkulator'),
+        home: const MyHomePage(title: 'Calculator'),
       ),
     );
   }
@@ -33,21 +32,10 @@ class MyApp extends StatelessWidget {
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key, required this.title}) : super(key: key);
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
   final String title;
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
-
 class _MyHomePageState extends State<MyHomePage> {
   String calculatorText = "";
   bool iscalculatorTextContainsOperator = false;
@@ -144,7 +132,7 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-  void addOperation() {
+  void operation() {
     setState(() {
       String a = '';
       String b = '';
@@ -155,77 +143,52 @@ class _MyHomePageState extends State<MyHomePage> {
         } else if (isFirstHalf == false) {
           b += calculatorText[i];
         }
-        if (calculatorText[i] == '+') {
+        if (calculatorText[i] == '+' ||
+            calculatorText[i] == '-' ||
+            calculatorText[i] == '*' ||
+            calculatorText[i] == '/') {
           isFirstHalf = false;
           a = a.substring(0, a.length - 1);
         }
       }
+      if (calculatorText.contains('+')) {
+        addOperation(a, b);
+      } else if (calculatorText.contains('-')) {
+        substractOperation(a, b);
+      } else if (calculatorText.contains('*')) {
+        multiplyOperation(a, b);
+      } else if (calculatorText.contains('/')) {
+        divideOperation(a, b);
+      }
+    });
+  }
+
+  void addOperation(String a, String b) {
+    setState(() {
       double result = double.parse(a) + double.parse(b);
       result = double.parse((result).toStringAsFixed(9));
       calculatorText = result.toString();
     });
   }
 
-  void substractOperation() {
+  void substractOperation(String a, String b) {
     setState(() {
-      String a = '';
-      String b = '';
-      bool isFirstHalf = true;
-      for (var i = 0; i < calculatorText.length; i++) {
-        if (isFirstHalf == true) {
-          a += calculatorText[i];
-        } else if (isFirstHalf == false) {
-          b += calculatorText[i];
-        }
-        if (calculatorText[i] == '-' && i != 0) {
-          isFirstHalf = false;
-          a = a.substring(0, a.length - 1);
-        }
-      }
       double result = double.parse(a) - double.parse(b);
       result = double.parse((result).toStringAsFixed(9));
       calculatorText = result.toString();
     });
   }
 
-  void multiplyOperation() {
+  void multiplyOperation(String a, String b) {
     setState(() {
-      String a = '';
-      String b = '';
-      bool isFirstHalf = true;
-      for (var i = 0; i < calculatorText.length; i++) {
-        if (isFirstHalf == true) {
-          a += calculatorText[i];
-        } else if (isFirstHalf == false) {
-          b += calculatorText[i];
-        }
-        if (calculatorText[i] == '*') {
-          isFirstHalf = false;
-          a = a.substring(0, a.length - 1);
-        }
-      }
       double result = double.parse(a) * double.parse(b);
       result = double.parse((result).toStringAsFixed(9));
       calculatorText = result.toString();
     });
   }
 
-  void divideOperation() {
+  void divideOperation(String a, String b) {
     setState(() {
-      String a = '';
-      String b = '';
-      bool isFirstHalf = true;
-      for (var i = 0; i < calculatorText.length; i++) {
-        if (isFirstHalf == true) {
-          a += calculatorText[i];
-        } else if (isFirstHalf == false) {
-          b += calculatorText[i];
-        }
-        if (calculatorText[i] == '/') {
-          isFirstHalf = false;
-          a = a.substring(0, a.length - 1);
-        }
-      }
       double result = double.parse(a) / double.parse(b);
       result = double.parse((result).toStringAsFixed(9));
       calculatorText = result.toString();
@@ -248,18 +211,9 @@ class _MyHomePageState extends State<MyHomePage> {
   void equalSignPressed() {
     setState(() {
       if (iscalculatorTextContainsOperator == true) {
-        if (calculatorText.contains("+")) {
-          addOperation();
-        } else if (calculatorText.contains("/")) {
-          divideOperation();
-        } else if (calculatorText.contains("*")) {
-          multiplyOperation();
-        } else if (calculatorText.contains("-")) {
-          substractOperation();
-        }
+        operation();
         if (checkIsInt() == true) {
-          calculatorText =
-              calculatorText.substring(0, calculatorText.length - 2);
+          calculatorText = calculatorText.substring(0, calculatorText.length - 2);
           iscalculatorTextContainsDot = false;
         }
         iscalculatorTextContainsOperator = false;
@@ -282,16 +236,8 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     double h = MediaQuery.of(context).size.height;
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return Scaffold(
       appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
       ),
       body: Center(
