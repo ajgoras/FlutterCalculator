@@ -238,14 +238,12 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     double h = MediaQuery.of(context).size.height;
-    if (h > 1000) {
-      h = 500;
-    }
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
       ),
       body: Center(
+        child: AspectRatio(aspectRatio: 58/109,
           child: Column(
         children: <Widget>[
           Container(
@@ -262,7 +260,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
           ),
           Container(
-            padding: EdgeInsets.fromLTRB(0, h * 0.08, 0, h * 0.07),
+            padding: EdgeInsets.fromLTRB(0, h * 0.07, 0, h * 0.07),
             alignment: Alignment.centerRight,
             child: Text(
               calculatorText,
@@ -273,8 +271,8 @@ class _MyHomePageState extends State<MyHomePage> {
             child: GridView.count(
               primary: false,
               padding: const EdgeInsets.all(15),
-              crossAxisSpacing: 9,
-              mainAxisSpacing: 9,
+              crossAxisSpacing: 8,
+              mainAxisSpacing: 8,
               crossAxisCount: 4,
               children: <Widget>[
                 ClipRRect(
@@ -654,14 +652,15 @@ class _MyHomePageState extends State<MyHomePage> {
                         '=',
                         style: TextStyle(fontSize: 30),
                       ),
-                    ),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ],
-            ),
-          ),
-        ],
-      )),
+            )),
+      ),
     );
   }
 }
