@@ -190,10 +190,12 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void divideOperation(String a, String b) {
     setState(() {
-      double result = double.parse(a) / double.parse(b);
-      result = double.parse((result).toStringAsFixed(9));
-      calculatorText = result.toString();
-      if (calculatorText == 'Infinity') {
+      if (b != "0") {
+        double result = double.parse(a) / double.parse(b);
+        result = double.parse((result).toStringAsFixed(9));
+        calculatorText = result.toString();
+      } 
+      else {
         calculatorText = "Don't do that!";
         Future.delayed(const Duration(milliseconds: 50), () {
           calculatorText = '';
