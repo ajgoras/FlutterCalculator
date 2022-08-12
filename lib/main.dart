@@ -193,6 +193,12 @@ class _MyHomePageState extends State<MyHomePage> {
       double result = double.parse(a) / double.parse(b);
       result = double.parse((result).toStringAsFixed(9));
       calculatorText = result.toString();
+      if (calculatorText == 'Infinity') {
+        calculatorText = "Don't do that!";
+        Future.delayed(const Duration(milliseconds: 50), () {
+          calculatorText = '';
+        });
+      }
     });
   }
 
@@ -243,415 +249,416 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Center(
-        child: AspectRatio(aspectRatio: 58/109,
-          child: Column(
-        children: <Widget>[
-          Container(
-            alignment: Alignment.centerRight,
-            child: TextButton(
-              onPressed: () {
-                AdaptiveTheme.of(context).toggleThemeMode();
-                ;
-              },
-              child: const Icon(
-                Icons.sunny,
-                size: 31,
-              ),
-            ),
-          ),
-          Container(
-            padding: EdgeInsets.fromLTRB(0, h * 0.07, 0, h * 0.07),
-            alignment: Alignment.centerRight,
-            child: Text(
-              calculatorText,
-              style: TextStyle(fontSize: 32),
-            ),
-          ),
-          Expanded(
-            child: GridView.count(
-              primary: false,
-              padding: const EdgeInsets.all(15),
-              crossAxisSpacing: 8,
-              mainAxisSpacing: 8,
-              crossAxisCount: 4,
+        child: AspectRatio(
+            aspectRatio: 58 / 109,
+            child: Column(
               children: <Widget>[
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(25),
-                  child: Container(
-                    padding: const EdgeInsets.all(8),
-                    color: Colors.teal[700],
-                    child: TextButton(
-                      style: TextButton.styleFrom(
-                        primary: Colors.white,
-                      ),
-                      onPressed: () {
-                        _clear();
-                      },
-                      child: const Text(
-                        'C',
-                        style: TextStyle(fontSize: 25),
-                      ),
+                Container(
+                  alignment: Alignment.centerRight,
+                  child: TextButton(
+                    onPressed: () {
+                      AdaptiveTheme.of(context).toggleThemeMode();
+                      ;
+                    },
+                    child: const Icon(
+                      Icons.sunny,
+                      size: 31,
                     ),
                   ),
                 ),
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(25),
-                  child: Container(
-                    padding: const EdgeInsets.all(8),
-                    color: Colors.teal[700],
-                    child: TextButton(
-                      style: TextButton.styleFrom(
-                        primary: Colors.white,
-                      ),
-                      onPressed: () {
-                        _backspace();
-                      },
-                      child: const Icon(
-                        Icons.arrow_back,
-                        size: 31,
-                      ),
-                    ),
+                Container(
+                  padding: EdgeInsets.fromLTRB(0, h * 0.07, 0, h * 0.07),
+                  alignment: Alignment.centerRight,
+                  child: Text(
+                    calculatorText,
+                    style: TextStyle(fontSize: 32),
                   ),
                 ),
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(25),
-                  child: Container(
-                    padding: const EdgeInsets.all(8),
-                    color: Colors.teal[700],
-                    child: TextButton(
-                      style: TextButton.styleFrom(
-                        primary: Colors.white,
+                Expanded(
+                  child: GridView.count(
+                    primary: false,
+                    padding: const EdgeInsets.all(15),
+                    crossAxisSpacing: 8,
+                    mainAxisSpacing: 8,
+                    crossAxisCount: 4,
+                    children: <Widget>[
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(25),
+                        child: Container(
+                          padding: const EdgeInsets.all(8),
+                          color: Colors.teal[700],
+                          child: TextButton(
+                            style: TextButton.styleFrom(
+                              primary: Colors.white,
+                            ),
+                            onPressed: () {
+                              _clear();
+                            },
+                            child: const Text(
+                              'C',
+                              style: TextStyle(fontSize: 25),
+                            ),
+                          ),
+                        ),
                       ),
-                      onPressed: () {
-                        _divide();
-                      },
-                      child: const Text(
-                        '/',
-                        style: TextStyle(fontSize: 24),
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(25),
+                        child: Container(
+                          padding: const EdgeInsets.all(8),
+                          color: Colors.teal[700],
+                          child: TextButton(
+                            style: TextButton.styleFrom(
+                              primary: Colors.white,
+                            ),
+                            onPressed: () {
+                              _backspace();
+                            },
+                            child: const Icon(
+                              Icons.arrow_back,
+                              size: 31,
+                            ),
+                          ),
+                        ),
                       ),
-                    ),
-                  ),
-                ),
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(25),
-                  child: Container(
-                    padding: const EdgeInsets.all(8),
-                    color: Colors.teal[700],
-                    child: TextButton(
-                      style: TextButton.styleFrom(
-                        primary: Colors.white,
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(25),
+                        child: Container(
+                          padding: const EdgeInsets.all(8),
+                          color: Colors.teal[700],
+                          child: TextButton(
+                            style: TextButton.styleFrom(
+                              primary: Colors.white,
+                            ),
+                            onPressed: () {
+                              _divide();
+                            },
+                            child: const Text(
+                              '/',
+                              style: TextStyle(fontSize: 24),
+                            ),
+                          ),
+                        ),
                       ),
-                      onPressed: () {
-                        _multiply();
-                      },
-                      child: const Text(
-                        '*',
-                        style: TextStyle(fontSize: 35),
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(25),
+                        child: Container(
+                          padding: const EdgeInsets.all(8),
+                          color: Colors.teal[700],
+                          child: TextButton(
+                            style: TextButton.styleFrom(
+                              primary: Colors.white,
+                            ),
+                            onPressed: () {
+                              _multiply();
+                            },
+                            child: const Text(
+                              '*',
+                              style: TextStyle(fontSize: 35),
+                            ),
+                          ),
+                        ),
                       ),
-                    ),
-                  ),
-                ),
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(25),
-                  child: Container(
-                    padding: const EdgeInsets.all(8),
-                    color: Colors.teal[400],
-                    child: TextButton(
-                      style: TextButton.styleFrom(
-                        primary: Colors.white,
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(25),
+                        child: Container(
+                          padding: const EdgeInsets.all(8),
+                          color: Colors.teal[400],
+                          child: TextButton(
+                            style: TextButton.styleFrom(
+                              primary: Colors.white,
+                            ),
+                            onPressed: () {
+                              _addNumber('7');
+                            },
+                            child: const Text(
+                              '7',
+                              style: TextStyle(fontSize: 25),
+                            ),
+                          ),
+                        ),
                       ),
-                      onPressed: () {
-                        _addNumber('7');
-                      },
-                      child: const Text(
-                        '7',
-                        style: TextStyle(fontSize: 25),
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(25),
+                        child: Container(
+                          padding: const EdgeInsets.all(8),
+                          color: Colors.teal[400],
+                          child: TextButton(
+                            style: TextButton.styleFrom(
+                              primary: Colors.white,
+                            ),
+                            onPressed: () {
+                              _addNumber('8');
+                            },
+                            child: const Text(
+                              '8',
+                              style: TextStyle(fontSize: 25),
+                            ),
+                          ),
+                        ),
                       ),
-                    ),
-                  ),
-                ),
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(25),
-                  child: Container(
-                    padding: const EdgeInsets.all(8),
-                    color: Colors.teal[400],
-                    child: TextButton(
-                      style: TextButton.styleFrom(
-                        primary: Colors.white,
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(25),
+                        child: Container(
+                          padding: const EdgeInsets.all(8),
+                          color: Colors.teal[400],
+                          child: TextButton(
+                            style: TextButton.styleFrom(
+                              primary: Colors.white,
+                            ),
+                            onPressed: () {
+                              _addNumber('9');
+                            },
+                            child: const Text(
+                              '9',
+                              style: TextStyle(fontSize: 25),
+                            ),
+                          ),
+                        ),
                       ),
-                      onPressed: () {
-                        _addNumber('8');
-                      },
-                      child: const Text(
-                        '8',
-                        style: TextStyle(fontSize: 25),
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(25),
+                        child: Container(
+                          padding: const EdgeInsets.all(8),
+                          color: Colors.teal[700],
+                          child: TextButton(
+                            style: TextButton.styleFrom(
+                              primary: Colors.white,
+                            ),
+                            onPressed: () {
+                              _substract();
+                            },
+                            child: const Text(
+                              '-',
+                              style: TextStyle(fontSize: 40),
+                            ),
+                          ),
+                        ),
                       ),
-                    ),
-                  ),
-                ),
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(25),
-                  child: Container(
-                    padding: const EdgeInsets.all(8),
-                    color: Colors.teal[400],
-                    child: TextButton(
-                      style: TextButton.styleFrom(
-                        primary: Colors.white,
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(25),
+                        child: Container(
+                          padding: const EdgeInsets.all(8),
+                          color: Colors.teal[400],
+                          child: TextButton(
+                            style: TextButton.styleFrom(
+                              primary: Colors.white,
+                            ),
+                            onPressed: () {
+                              _addNumber('4');
+                            },
+                            child: const Text(
+                              '4',
+                              style: TextStyle(fontSize: 25),
+                            ),
+                          ),
+                        ),
                       ),
-                      onPressed: () {
-                        _addNumber('9');
-                      },
-                      child: const Text(
-                        '9',
-                        style: TextStyle(fontSize: 25),
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(25),
+                        child: Container(
+                          padding: const EdgeInsets.all(8),
+                          color: Colors.teal[400],
+                          child: TextButton(
+                            style: TextButton.styleFrom(
+                              primary: Colors.white,
+                            ),
+                            onPressed: () {
+                              _addNumber('5');
+                            },
+                            child: const Text(
+                              '5',
+                              style: TextStyle(fontSize: 25),
+                            ),
+                          ),
+                        ),
                       ),
-                    ),
-                  ),
-                ),
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(25),
-                  child: Container(
-                    padding: const EdgeInsets.all(8),
-                    color: Colors.teal[700],
-                    child: TextButton(
-                      style: TextButton.styleFrom(
-                        primary: Colors.white,
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(25),
+                        child: Container(
+                          padding: const EdgeInsets.all(8),
+                          color: Colors.teal[400],
+                          child: TextButton(
+                            style: TextButton.styleFrom(
+                              primary: Colors.white,
+                            ),
+                            onPressed: () {
+                              _addNumber('6');
+                            },
+                            child: const Text(
+                              '6',
+                              style: TextStyle(fontSize: 25),
+                            ),
+                          ),
+                        ),
                       ),
-                      onPressed: () {
-                        _substract();
-                      },
-                      child: const Text(
-                        '-',
-                        style: TextStyle(fontSize: 40),
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(25),
+                        child: Container(
+                          padding: const EdgeInsets.all(8),
+                          color: Colors.teal[700],
+                          child: TextButton(
+                            style: TextButton.styleFrom(
+                              primary: Colors.white,
+                            ),
+                            onPressed: () {
+                              _add();
+                            },
+                            child: const Text(
+                              '+',
+                              style: TextStyle(fontSize: 35),
+                            ),
+                          ),
+                        ),
                       ),
-                    ),
-                  ),
-                ),
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(25),
-                  child: Container(
-                    padding: const EdgeInsets.all(8),
-                    color: Colors.teal[400],
-                    child: TextButton(
-                      style: TextButton.styleFrom(
-                        primary: Colors.white,
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(25),
+                        child: Container(
+                          padding: const EdgeInsets.all(8),
+                          color: Colors.teal[400],
+                          child: TextButton(
+                            style: TextButton.styleFrom(
+                              primary: Colors.white,
+                            ),
+                            onPressed: () {
+                              _addNumber('1');
+                            },
+                            child: const Text(
+                              '1',
+                              style: TextStyle(fontSize: 25),
+                            ),
+                          ),
+                        ),
                       ),
-                      onPressed: () {
-                        _addNumber('4');
-                      },
-                      child: const Text(
-                        '4',
-                        style: TextStyle(fontSize: 25),
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(25),
+                        child: Container(
+                          padding: const EdgeInsets.all(8),
+                          color: Colors.teal[400],
+                          child: TextButton(
+                            style: TextButton.styleFrom(
+                              primary: Colors.white,
+                            ),
+                            onPressed: () {
+                              _addNumber('2');
+                            },
+                            child: const Text(
+                              '2',
+                              style: TextStyle(fontSize: 25),
+                            ),
+                          ),
+                        ),
                       ),
-                    ),
-                  ),
-                ),
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(25),
-                  child: Container(
-                    padding: const EdgeInsets.all(8),
-                    color: Colors.teal[400],
-                    child: TextButton(
-                      style: TextButton.styleFrom(
-                        primary: Colors.white,
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(25),
+                        child: Container(
+                          padding: const EdgeInsets.all(8),
+                          color: Colors.teal[400],
+                          child: TextButton(
+                            style: TextButton.styleFrom(
+                              primary: Colors.white,
+                            ),
+                            onPressed: () {
+                              _addNumber('3');
+                            },
+                            child: const Text(
+                              '3',
+                              style: TextStyle(fontSize: 25),
+                            ),
+                          ),
+                        ),
                       ),
-                      onPressed: () {
-                        _addNumber('5');
-                      },
-                      child: const Text(
-                        '5',
-                        style: TextStyle(fontSize: 25),
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(25),
+                        child: Container(
+                          padding: const EdgeInsets.all(8),
+                          color: Colors.teal[700],
+                          child: TextButton(
+                            style: TextButton.styleFrom(
+                              primary: Colors.white,
+                            ),
+                            onPressed: () {
+                              changeSign();
+                            },
+                            child: const Text(
+                              '+/-',
+                              style: TextStyle(fontSize: 30),
+                            ),
+                          ),
+                        ),
                       ),
-                    ),
-                  ),
-                ),
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(25),
-                  child: Container(
-                    padding: const EdgeInsets.all(8),
-                    color: Colors.teal[400],
-                    child: TextButton(
-                      style: TextButton.styleFrom(
-                        primary: Colors.white,
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(25),
+                        child: Container(
+                          padding: const EdgeInsets.all(8),
+                          color: Colors.teal[700],
+                          child: TextButton(
+                            style: TextButton.styleFrom(
+                              primary: Colors.white,
+                            ),
+                            onPressed: () {
+                              _addNumber('00');
+                            },
+                            child: const Text(
+                              '00',
+                              style: TextStyle(fontSize: 25),
+                            ),
+                          ),
+                        ),
                       ),
-                      onPressed: () {
-                        _addNumber('6');
-                      },
-                      child: const Text(
-                        '6',
-                        style: TextStyle(fontSize: 25),
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(25),
+                        child: Container(
+                          padding: const EdgeInsets.all(8),
+                          color: Colors.teal[700],
+                          child: TextButton(
+                            style: TextButton.styleFrom(
+                              primary: Colors.white,
+                            ),
+                            onPressed: () {
+                              _addNumber('0');
+                            },
+                            child: const Text(
+                              '0',
+                              style: TextStyle(fontSize: 25),
+                            ),
+                          ),
+                        ),
                       ),
-                    ),
-                  ),
-                ),
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(25),
-                  child: Container(
-                    padding: const EdgeInsets.all(8),
-                    color: Colors.teal[700],
-                    child: TextButton(
-                      style: TextButton.styleFrom(
-                        primary: Colors.white,
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(25),
+                        child: Container(
+                          padding: const EdgeInsets.all(8),
+                          color: Colors.teal[700],
+                          child: TextButton(
+                            style: TextButton.styleFrom(
+                              primary: Colors.white,
+                            ),
+                            onPressed: () {
+                              _dot();
+                            },
+                            child: const Text(
+                              '.',
+                              style: TextStyle(fontSize: 30),
+                            ),
+                          ),
+                        ),
                       ),
-                      onPressed: () {
-                        _add();
-                      },
-                      child: const Text(
-                        '+',
-                        style: TextStyle(fontSize: 35),
-                      ),
-                    ),
-                  ),
-                ),
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(25),
-                  child: Container(
-                    padding: const EdgeInsets.all(8),
-                    color: Colors.teal[400],
-                    child: TextButton(
-                      style: TextButton.styleFrom(
-                        primary: Colors.white,
-                      ),
-                      onPressed: () {
-                        _addNumber('1');
-                      },
-                      child: const Text(
-                        '1',
-                        style: TextStyle(fontSize: 25),
-                      ),
-                    ),
-                  ),
-                ),
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(25),
-                  child: Container(
-                    padding: const EdgeInsets.all(8),
-                    color: Colors.teal[400],
-                    child: TextButton(
-                      style: TextButton.styleFrom(
-                        primary: Colors.white,
-                      ),
-                      onPressed: () {
-                        _addNumber('2');
-                      },
-                      child: const Text(
-                        '2',
-                        style: TextStyle(fontSize: 25),
-                      ),
-                    ),
-                  ),
-                ),
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(25),
-                  child: Container(
-                    padding: const EdgeInsets.all(8),
-                    color: Colors.teal[400],
-                    child: TextButton(
-                      style: TextButton.styleFrom(
-                        primary: Colors.white,
-                      ),
-                      onPressed: () {
-                        _addNumber('3');
-                      },
-                      child: const Text(
-                        '3',
-                        style: TextStyle(fontSize: 25),
-                      ),
-                    ),
-                  ),
-                ),
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(25),
-                  child: Container(
-                    padding: const EdgeInsets.all(8),
-                    color: Colors.teal[700],
-                    child: TextButton(
-                      style: TextButton.styleFrom(
-                        primary: Colors.white,
-                      ),
-                      onPressed: () {
-                        changeSign();
-                      },
-                      child: const Text(
-                        '+/-',
-                        style: TextStyle(fontSize: 30),
-                      ),
-                    ),
-                  ),
-                ),
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(25),
-                  child: Container(
-                    padding: const EdgeInsets.all(8),
-                    color: Colors.teal[700],
-                    child: TextButton(
-                      style: TextButton.styleFrom(
-                        primary: Colors.white,
-                      ),
-                      onPressed: () {
-                        _addNumber('00');
-                      },
-                      child: const Text(
-                        '00',
-                        style: TextStyle(fontSize: 25),
-                      ),
-                    ),
-                  ),
-                ),
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(25),
-                  child: Container(
-                    padding: const EdgeInsets.all(8),
-                    color: Colors.teal[700],
-                    child: TextButton(
-                      style: TextButton.styleFrom(
-                        primary: Colors.white,
-                      ),
-                      onPressed: () {
-                        _addNumber('0');
-                      },
-                      child: const Text(
-                        '0',
-                        style: TextStyle(fontSize: 25),
-                      ),
-                    ),
-                  ),
-                ),
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(25),
-                  child: Container(
-                    padding: const EdgeInsets.all(8),
-                    color: Colors.teal[700],
-                    child: TextButton(
-                      style: TextButton.styleFrom(
-                        primary: Colors.white,
-                      ),
-                      onPressed: () {
-                        _dot();
-                      },
-                      child: const Text(
-                        '.',
-                        style: TextStyle(fontSize: 30),
-                      ),
-                    ),
-                  ),
-                ),
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(25),
-                  child: Container(
-                    padding: const EdgeInsets.all(8),
-                    color: Colors.teal[700],
-                    child: TextButton(
-                      style: TextButton.styleFrom(
-                        primary: Colors.white,
-                      ),
-                      onPressed: () {
-                        equalSignPressed();
-                      },
-                      child: const Text(
-                        '=',
-                        style: TextStyle(fontSize: 30),
-                      ),
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(25),
+                        child: Container(
+                          padding: const EdgeInsets.all(8),
+                          color: Colors.teal[700],
+                          child: TextButton(
+                            style: TextButton.styleFrom(
+                              primary: Colors.white,
+                            ),
+                            onPressed: () {
+                              equalSignPressed();
+                            },
+                            child: const Text(
+                              '=',
+                              style: TextStyle(fontSize: 30),
+                            ),
                           ),
                         ),
                       ),
